@@ -8,7 +8,12 @@
  *  05-06-2012 new created
  */
 var statusManager = $({});
+statusManager.languages = [undefined, 'ja', 'en'];
+statusManager.spans = ['y', 'm', 'w', 'd', 'h', undefined];
+
 statusManager.status = false;
+statusManager.langage = 0;
+statusManager.span = 0;
 
 $.extend(statusManager, {
   getStatus: function() {
@@ -16,5 +21,24 @@ $.extend(statusManager, {
   },
   changeStatus: function() {
     statusManager.status = !statusManager.status;
-  }
+  },
+  getLanguage: function() {
+    return statusManager.languages[statusManager.langage];
+  },
+  changeLanguage: function() {
+    statusManager.langage += 1;
+    statusManager.langage %= statusManager.languages.length;
+  },
+  getSpan: function() {
+    return statusManager.spans[statusManager.span];
+  },
+  changeSpan: function() {
+    statusManager.span += 1;
+    statusManager.span %= statusManager.spans.length;
+  },
+  formatParam: function() {
+    var lang = this.getLanguage();
+    var spn = this.getSpan();
+    return ((lang) ? '&lr=lang_' + lang : '') + ((spn) ? '&tbs=qdr:' + spn : '');
+  },
 });

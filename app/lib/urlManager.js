@@ -39,5 +39,11 @@ $.extend(urlManager, {
     } else {
       return "";
     }
+  },
+  cleanParam: function(url) {
+    url = url.replace(/&as_qdr=[ymwdh]/g, "");
+    url = url.replace(/&tbs=qdr:[ymwdh]/g, "");
+    url = url.replace(/&lr=lang_.{2}/, "");
+    return url;
   }
 });
